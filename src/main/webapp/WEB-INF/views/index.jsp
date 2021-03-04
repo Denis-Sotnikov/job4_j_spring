@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
+<%@ page import="ru.job4j.accident.model.Accident" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -21,21 +22,23 @@
     stringList.add("Natasha");
 %>
 <%--Hello : Accident--%>
-<label for="table">Получаемые данные из indexControl</label>
-<table class="table" id="table">
+<label for="tableFirst">Получаемые данные из indexControl</label>
+<table class="table" id="tableFirst">
     <thead>
     <tr>
-        <th>Имя</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Text</th>
+        <th>Adress</th>
     </tr>
     </thead>
     <tbody>
-        <c:forEach var="string" items="<%=stringList%>" >
-            <tr><td><c:out value="${string}"/> </td></tr>
-        </c:forEach>
-        <tr><td><c:out value="${user}"/> </td></tr>
-        <c:forEach var="string" items="${listWithUsers}" >
-            <tr><td><c:out value="${string}"/> </td></tr>
-        </c:forEach>
+    <c:forEach var="accident" items="${accidents}" >
+        <tr><td>${accident.value.getId()}</td>
+        <td><c:out value="${accident.value.getName()}"/></td>
+        <td><c:out value="${accident.value.getText()}"/></td>
+        <td><c:out value="${accident.value.getAddress()}"/></td></tr>
+    </c:forEach>
     </tbody>
 </table>
 </body>
