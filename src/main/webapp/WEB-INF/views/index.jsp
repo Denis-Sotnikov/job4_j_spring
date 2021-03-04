@@ -12,34 +12,29 @@
     <title>Accident</title>
 </head>
 <body>
-<%
-    HttpSession sc = request.getSession();
-    String a = (String) sc.getAttribute("user");
-    String b = "Hello";
-    List<String> stringList = new ArrayList<>();
-    stringList.add("Vika");
-    stringList.add("Masha");
-    stringList.add("Natasha");
-%>
-<%--Hello : Accident--%>
-<label for="tableFirst">Получаемые данные из indexControl</label>
-<table class="table" id="tableFirst">
-    <thead>
-    <tr>
-        <th>Id</th>
-        <th>Name</th>
-        <th>Text</th>
-        <th>Adress</th>
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach var="accident" items="${accidents}" >
-        <tr><td>${accident.value.getId()}</td>
-        <td><c:out value="${accident.value.getName()}"/></td>
-        <td><c:out value="${accident.value.getText()}"/></td>
-        <td><c:out value="${accident.value.getAddress()}"/></td></tr>
-    </c:forEach>
-    </tbody>
-</table>
+<div style="width: 60%; padding-left: 30px; padding-top: 30px">
+        <label for="tableFirst">Получаемые данные из indexControl</label>
+        <table class="table" id="tableFirst">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Text</th>
+                <th>Adress</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="accident" items="${accidents}" >
+                <tr>
+                <td><c:out value="${accident.getId()}"/></td>
+                <td><c:out value="${accident.getName()}"/></td>
+                <td><c:out value="${accident.getText()}"/></td>
+                <td><c:out value="${accident.getAddress()}"/></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+        <br>
+</div>
 </body>
 </html>

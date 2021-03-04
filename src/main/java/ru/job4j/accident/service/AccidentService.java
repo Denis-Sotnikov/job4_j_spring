@@ -1,25 +1,28 @@
 package ru.job4j.accident.service;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
+import ru.job4j.accident.repository.Store;
+
+import java.util.List;
 
 @Service
+@Component
 public class AccidentService {
-    private AccidentMem accidentMem = new AccidentMem();
-    public boolean addAccident(Accident accident) {
-        accidentMem.getAccidents().put(accident.getId(), accident);
-        return true;
+    private final Store store;
+
+    public AccidentService(Store store) {
+        this.store = store;
     }
 
-    public AccidentService() {
+    public void save(Accident accident) {
+        store.add(accident);
     }
 
-    public AccidentMem getAccidentMem() {
-        return accidentMem;
+    public List<Accident> getAll() {
+        return store.getAll();
     }
 
-    public void setAccidentMem(AccidentMem accidentMem) {
-        this.accidentMem = accidentMem;
-    }
 }
