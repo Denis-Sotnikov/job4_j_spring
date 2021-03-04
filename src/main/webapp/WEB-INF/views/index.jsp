@@ -35,6 +35,10 @@
             </tbody>
         </table>
         <br>
+    <form>
+        <input type="button" class="btn btn-primary" value="Добавить инцидент" onClick='location.href="<c:url value='/create'/>"'>
+    </form>
+    <br>
 </div>
 </body>
 </html>
