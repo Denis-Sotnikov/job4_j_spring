@@ -21,6 +21,7 @@
                 <th>Name</th>
                 <th>Text</th>
                 <th>Adress</th>
+                <th>Type</th>
             </tr>
             </thead>
             <tbody>
@@ -30,6 +31,7 @@
                 <td><c:out value="${accident.getName()}"/></td>
                 <td><c:out value="${accident.getText()}"/></td>
                 <td><c:out value="${accident.getAddress()}"/></td>
+                <td><c:out value="${accident.getType().getName()}"/></td>
                 <td>
                     <span>
                         <a href="<c:url value='/update?id=${accident.id}'/>">Редактировать инцидент</a>
