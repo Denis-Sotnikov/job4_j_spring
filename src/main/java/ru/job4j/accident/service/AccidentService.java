@@ -11,18 +11,18 @@ import java.util.List;
 @Service
 @Component
 public class AccidentService {
-    private final Store store;
+    private final AccidentMem mem;
 
-    public AccidentService(Store store) {
-        this.store = store;
+    public AccidentService(AccidentMem mem) {
+        this.mem = mem;
     }
 
     public void save(Accident accident) {
-        store.add(accident);
+        mem.add(accident);
     }
 
     public List<Accident> getAll() {
-        return store.getAll();
+        return mem.getAll();
     }
 
 }

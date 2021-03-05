@@ -24,10 +24,8 @@ public class AccidentMem implements Store<Accident> {
     }
 
     @Override
-    public void update(Accident accident) {
-        if (accidents.containsKey(accident.getId())) {
-            accidents.put(accident.getId(), accident);
-        }
+    public boolean update(Accident accident) {
+        return accidents.replace(accident.getId(), accidents.get(accident.getId()), accident);
     }
 
     @Override
@@ -37,7 +35,6 @@ public class AccidentMem implements Store<Accident> {
 
     @Override
     public Accident add(Accident accident) {
-        accidents.put(accident.getId(), accident);
-        return accident;
+        return  accidents.putIfAbsent(accident.getId(), accident);
     }
 }
