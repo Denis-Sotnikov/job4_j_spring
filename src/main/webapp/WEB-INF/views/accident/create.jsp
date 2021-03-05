@@ -10,7 +10,7 @@
         </tr>
         <tr>
             <td>Описание:</td>
-            <td><input type='text' name='deacription'></td>
+            <td><input type='text' name='text'></td>
         </tr>
         <tr>
             <td>Address:</td>

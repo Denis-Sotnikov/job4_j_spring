@@ -25,4 +25,8 @@ public class AccidentService {
         return mem.getAll();
     }
 
+    public boolean update(Accident accident) {
+        return mem.update(accident);
+    }
+
 }

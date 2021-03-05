@@ -22,7 +22,21 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident) {
-        accidentService.save(accident);
+        System.out.println("accident.id = " + accident.id);
+        if (accident.id == 0) {
+            accidentService.save(accident);
+        } else {
+            accidentService.update(accident);
+        }
         return "redirect:/";
     }
+
+    @GetMapping("/edit")
+    public String edit() {
+        return "accident/edit";
+    }
+
+
+
+
 }
