@@ -30,6 +30,11 @@
                 <td><c:out value="${accident.getName()}"/></td>
                 <td><c:out value="${accident.getText()}"/></td>
                 <td><c:out value="${accident.getAddress()}"/></td>
+                <td>
+                    <span>
+                        <a href="<c:url value='/update?id=${accident.id}'/>">Редактировать инцидент</a>
+                    </span>
+                </td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -37,9 +42,6 @@
         <br>
     <form>
         <input type="button" class="btn btn-primary" value="Добавить инцидент" onClick='location.href="<c:url value='/create'/>"'>
-    </form>
-    <form>
-        <input type="button" class="btn btn-primary" value="Редактировать инцидент" onClick='location.href="<c:url value='/edit'/>"'>
     </form>
 </div>
 </body>

@@ -6,4 +6,5 @@ public interface Store<T> {
     boolean update(T t);
     List<T> getAll();
     T add(T t);
+    T findById(int id);
 }

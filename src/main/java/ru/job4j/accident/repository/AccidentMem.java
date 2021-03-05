@@ -36,7 +36,15 @@ public class AccidentMem implements Store<Accident> {
     @Override
     public Accident add(Accident accident) {
        Integer count = accidents.size();
-       accident.setId(++count);
-       return  accidents.putIfAbsent(++count, accident);
+        System.out.println("accidents.size() = " + accidents.size());
+       accident.setId(count + 1);
+       return  accidents.putIfAbsent(count + 1, accident);
     }
+
+    @Override
+    public Accident findById(int id) {
+        return accidents.get(id);
+    }
+
+
 }
