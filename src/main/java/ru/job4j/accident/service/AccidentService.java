@@ -17,8 +17,8 @@ public class AccidentService {
         this.mem = mem;
     }
 
-    public void save(Accident accident) {
-        mem.add(accident);
+    public void save(Accident accident, List<String> rules) {
+        mem.add(accident, rules);
     }
 
     public List<Accident> getAll() {

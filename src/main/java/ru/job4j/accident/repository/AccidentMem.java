@@ -4,26 +4,28 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 @Component
-public class AccidentMem implements Store<Accident> {
+public class AccidentMem implements Store<Accident, String> {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
     private final List<AccidentType> accidentTypes = List.of(AccidentType.of(1, "Две машины"),
             AccidentType.of(2, "Машина и человек"),
             AccidentType.of(3, "Машина и велосипед"));
+    private final List<Rule> rules = List.of(Rule.of(1, "Статья. 1"),
+            Rule.of(2, "Статья. 2"),
+            Rule.of(3, "Статья. 3"));
 
     public AccidentMem() {
-        Accident first = new Accident(1, "Первый инцидент", "Все ок", "SPB", AccidentType.of(1, "Заглох"));
+        Accident first = new Accident(1, "Первый инцидент", "Все ок", "SPB", AccidentType.of(1, "Заглох"), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(first.getId(), first);
-        Accident second = new Accident(2, "Второй инцидент", "Все ок", "USA", AccidentType.of(2, "Сломался"));
+        Accident second = new Accident(2, "Второй инцидент", "Все ок", "USA", AccidentType.of(2, "Сломался"), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(second.getId(), second);
-        Accident third = new Accident(3, "Третий инцидент", "Все ок", "Canada", AccidentType.of(3, "Высох"));
+        Accident third = new Accident(3, "Третий инцидент", "Все ок", "Canada", AccidentType.of(3, "Высох"), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(third.getId(), third);
     }
 
@@ -39,10 +41,15 @@ public class AccidentMem implements Store<Accident> {
     }
 
     @Override
-    public Accident add(Accident accident) {
+    public Accident add(Accident accident, List<String> ruls) {
+       Set<Rule> ruleSet = new HashSet<>();
+        for (String s : ruls) {
+            ruleSet.add(rules.get(Integer.parseInt(s) - 1));
+        }
        Integer count = accidents.size();
        accident.setId(count + 1);
        accident.setType(accidentTypes.get(accident.getType().getId() - 1));
+       accident.setRules(ruleSet);
        return  accidents.putIfAbsent(count + 1, accident);
     }
 
@@ -50,6 +57,4 @@ public class AccidentMem implements Store<Accident> {
     public Accident findById(int id) {
         return accidents.get(id);
     }
-
-
 }

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <title>Update accident</title>
-    <html>
+</head>
 <body>
 <div style="width: 60%; padding-left: 30px; padding-top: 30px">
     <form  action="<c:url value='/save'/>" method='POST'>
@@ -35,14 +35,14 @@
             <tr>
                 <td>Тип:</td>
                 <td>
-                    <select name="type.id">
+                    <select name="type.id" style="margin-top: 10px">
                         <c:forEach var="type" items="${types}" >
                             <option value="${type.getId()}">${type.getName()}</option>
                         </c:forEach>
                     </select>
                 </td>
             </tr>
-            <tr style="padding-bottom: 50px">
+            <tr>
                 <td colspan='2'><input name="submit" class="btn btn-primary" style="margin-top: 10px"  type="submit" value="Сохранить" /></td>
             </tr>
         </table>

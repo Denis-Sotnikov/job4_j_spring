@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 
 import java.util.ArrayList;
@@ -28,13 +29,21 @@ public class AccidentControl {
         types.add(AccidentType.of(2, "Машина и человек"));
         types.add(AccidentType.of(3, "Машина и велосипед"));
         model.addAttribute("types", types);
+        List<Rule> rules = new ArrayList<>();
+        rules.add(Rule.of(1, "Статья. 1"));
+        rules.add(Rule.of(2, "Статья. 2"));
+        rules.add(Rule.of(3, "Статья. 3"));
+        model.addAttribute("rules", rules);
         return "accident/create";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute Accident accident) {
+    public String save(@RequestParam("rIds") List<String> rules, Model model, @ModelAttribute Accident accident) {
+        System.out.println("rules = " + rules);
+        System.out.println("accident = " + accident);
+
         if (accident.id == 0) {
-            accidentService.save(accident);
+            accidentService.save(accident, rules);
         } else {
             accidentService.update(accident);
         }
