@@ -38,14 +38,13 @@ public class AccidentControl {
     }
 
     @PostMapping("/save")
-    public String save(@RequestParam("rIds") List<String> rules, Model model, @ModelAttribute Accident accident) {
-        System.out.println("rules = " + rules);
+    public String save(@RequestParam("rIds") List<String> rules, @ModelAttribute Accident accident) {
         System.out.println("accident = " + accident);
 
         if (accident.id == 0) {
             accidentService.save(accident, rules);
         } else {
-            accidentService.update(accident);
+            accidentService.update(accident, rules);
         }
         return "redirect:/";
     }
@@ -63,6 +62,11 @@ public class AccidentControl {
         types.add(AccidentType.of(3, "Машина и велосипед"));
         model.addAttribute("types", types);
         model.addAttribute("accident", accidentService.findById(id));
+        List<Rule> rules = new ArrayList<>();
+        rules.add(Rule.of(1, "Статья. 1"));
+        rules.add(Rule.of(2, "Статья. 2"));
+        rules.add(Rule.of(3, "Статья. 3"));
+        model.addAttribute("rules", rules);
         return "accident/update";
     }
 }

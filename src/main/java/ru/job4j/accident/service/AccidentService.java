@@ -25,8 +25,8 @@ public class AccidentService {
         return mem.getAll();
     }
 
-    public boolean update(Accident accident) {
-        return mem.update(accident);
+    public boolean update(Accident accident,  List<String> rules) {
+        return mem.update(accident, rules);
     }
 
     public Accident findById(int id) {

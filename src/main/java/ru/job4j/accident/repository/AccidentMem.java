@@ -30,8 +30,14 @@ public class AccidentMem implements Store<Accident, String> {
     }
 
     @Override
-    public boolean update(Accident accident) {
+    public boolean update(Accident accident, List<String> ruls) {
+        Set<Rule> ruleSet = new HashSet<>();
+        for (String s : ruls) {
+            ruleSet.add(rules.get(Integer.parseInt(s) - 1));
+        }
         accident.setType(accidentTypes.get(accident.getType().getId() - 1));
+        accident.setRules(ruleSet);
+        System.out.println(accident);
         return accidents.replace(accident.getId(), accidents.get(accident.getId()), accident);
     }
 
@@ -50,6 +56,7 @@ public class AccidentMem implements Store<Accident, String> {
        accident.setId(count + 1);
        accident.setType(accidentTypes.get(accident.getType().getId() - 1));
        accident.setRules(ruleSet);
+        System.out.println(accident);
        return  accidents.putIfAbsent(count + 1, accident);
     }
 
