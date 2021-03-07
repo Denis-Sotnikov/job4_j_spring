@@ -22,11 +22,11 @@ public class AccidentMem implements Store<Accident, String> {
             Rule.of(3, "Статья. 3"));
 
     public AccidentMem() {
-        Accident first = new Accident(1, "Первый инцидент", "Все ок", "SPB", AccidentType.of(1, "Заглох"), Set.of(Rule.of(1, "Статья 1")));
+        Accident first = new Accident(1, "Первый инцидент", "Все ок", "SPB", AccidentType.of(4, "Заглох"), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(first.getId(), first);
-        Accident second = new Accident(2, "Второй инцидент", "Все ок", "USA", AccidentType.of(2, "Сломался"), Set.of(Rule.of(1, "Статья 1")));
+        Accident second = new Accident(2, "Второй инцидент", "Все ок", "USA", AccidentType.of(5, "Сломался"), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(second.getId(), second);
-        Accident third = new Accident(3, "Третий инцидент", "Все ок", "Canada", AccidentType.of(3, "Высох"), Set.of(Rule.of(1, "Статья 1")));
+        Accident third = new Accident(3, "Третий инцидент", "Все ок", "Canada", AccidentType.of(6, "Высох"), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(third.getId(), third);
     }
 
@@ -64,5 +64,13 @@ public class AccidentMem implements Store<Accident, String> {
     @Override
     public Accident findById(int id) {
         return accidents.get(id);
+    }
+
+    public List<AccidentType> getAccidentTypes() {
+        return accidentTypes;
+    }
+
+    public List<Rule> getRules() {
+        return rules;
     }
 }
