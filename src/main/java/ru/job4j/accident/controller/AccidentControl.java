@@ -39,13 +39,7 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@RequestParam("rIds") List<String> rules, @ModelAttribute Accident accident) {
-        System.out.println("accident = " + accident);
-
-        if (accident.id == 0) {
-            accidentService.save(accident, rules);
-        } else {
-            accidentService.update(accident, rules);
-        }
+        accidentService.saveOr(accident, rules);
         return "redirect:/";
     }
 

@@ -8,6 +8,7 @@ import ru.job4j.accident.model.Rule;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 @Component
@@ -52,12 +53,12 @@ public class AccidentMem implements Store<Accident, String> {
         for (String s : ruls) {
             ruleSet.add(rules.get(Integer.parseInt(s) - 1));
         }
-       Integer count = accidents.size();
-       accident.setId(count + 1);
+       AtomicInteger atomicInt = new AtomicInteger(accidents.size());
+       accident.setId(atomicInt.incrementAndGet());
        accident.setType(accidentTypes.get(accident.getType().getId() - 1));
        accident.setRules(ruleSet);
-        System.out.println(accident);
-       return  accidents.putIfAbsent(count + 1, accident);
+       System.out.println(accident);
+       return  accidents.putIfAbsent(atomicInt.get(), accident);
     }
 
     @Override

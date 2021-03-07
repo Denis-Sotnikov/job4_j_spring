@@ -29,6 +29,14 @@ public class AccidentService {
         return mem.update(accident, rules);
     }
 
+    public void saveOr(Accident accident, List<String> rules) {
+        if (accident.id == 0) {
+            this.save(accident, rules);
+        } else {
+            this.update(accident, rules);
+        }
+    }
+
     public Accident findById(int id) {
         return mem.findById(id);
     }
