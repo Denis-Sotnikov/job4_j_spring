@@ -16,6 +16,8 @@ public class Rule {
         return rule;
     }
 
+
+
     public int getId() {
         return id;
     }

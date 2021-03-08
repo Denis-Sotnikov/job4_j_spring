@@ -1,13 +1,14 @@
 package ru.job4j.accident.model;
 
-
-import java.util.ArrayList;
 import java.util.Objects;
 
 
 public class AccidentType {
     private int id;
     private String name;
+
+    public AccidentType() {
+    }
 
     public static AccidentType of(int id, String name) {
         AccidentType type = new AccidentType();
