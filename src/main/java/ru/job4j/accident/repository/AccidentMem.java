@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 @Component
 public class AccidentMem implements Store<Accident, String> {
+    AtomicInteger atomicInt = new AtomicInteger();
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
     private final List<AccidentType> accidentTypes = List.of(AccidentType.of(1, "Две машины"),
             AccidentType.of(2, "Машина и человек"),
@@ -53,11 +54,10 @@ public class AccidentMem implements Store<Accident, String> {
         for (String s : ruls) {
             ruleSet.add(rules.get(Integer.parseInt(s) - 1));
         }
-       AtomicInteger atomicInt = new AtomicInteger(accidents.size());
+       atomicInt.set(accidents.size());
        accident.setId(atomicInt.incrementAndGet());
        accident.setType(accidentTypes.get(accident.getType().getId() - 1));
        accident.setRules(ruleSet);
-       System.out.println(accident);
        return  accidents.putIfAbsent(atomicInt.get(), accident);
     }
 
