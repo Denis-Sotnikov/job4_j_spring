@@ -1,5 +1,5 @@
 DROP TABLE accident;
-CREATE TABLE accident (
+CREATE TABLE accidents (
   id serial primary key,
   name varchar(2000),
   text text,
@@ -17,17 +17,11 @@ create table articleofthelaw(
   name varchar(2000)
 );
 
-create table accident_article_of_the_law(
+create table accidents_articleofthelaw(
    id serial primary key,
    accident_id int not null references accident(id),
    article_id int not null references articleofthelaw(id)
 );
-
-select  * from accident_article_of_the_law where accident_id = 1;
-
-select accident.id, accident.name, text, address, accident.type_id as typeId, t.name  as tName, aaotl.article_id from accident join types t on accident.type_id = t.id join accident_article_of_the_law aaotl on accident.id = aaotl.accident_id;
-select a.id as aId, name from accident_article_of_the_law join articleofthelaw a on accident_article_of_the_law.article_id = a.id where accident_id = 1;
-
 
 insert into types(name) values ('Две машины');
 insert into types(name) values ('Машина и человек');

@@ -7,36 +7,36 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.service.AccidentServiceJdbc;
+import ru.job4j.accident.service.AccidentServiceHbm;
 
 import java.util.List;
 
 @Controller
 public class AccidentControl {
-    private final AccidentServiceJdbc accidentServiceJdbc;
+    private  final AccidentServiceHbm serviceHbm;
 
-    public AccidentControl(AccidentServiceJdbc accidentServiceJdbc) {
-        this.accidentServiceJdbc = accidentServiceJdbc;
+    public AccidentControl(AccidentServiceHbm serviceHbm) {
+        this.serviceHbm = serviceHbm;
     }
 
     @GetMapping("/create")
     public String create(Model model) {
-        model.addAttribute("types", accidentServiceJdbc.getAccidentTypesList());
-        model.addAttribute("rules", accidentServiceJdbc.getRulesList());
+        model.addAttribute("types", serviceHbm.getAccidentTypesList());
+        model.addAttribute("rules", serviceHbm.getRulesList());
         return "accident/create";
     }
 
     @PostMapping("/save")
     public String save(@RequestParam("rIds") List<String> rules, @ModelAttribute Accident accident) {
-        accidentServiceJdbc.saveOr(accident, rules);
+        serviceHbm.saveOr(accident, rules);
         return "redirect:/";
     }
 
     @GetMapping("/update")
     public String update(@RequestParam("id") int id, Model model) {
-        model.addAttribute("types", accidentServiceJdbc.getAccidentTypesList());
-        model.addAttribute("rules", accidentServiceJdbc.getRulesList());
-        model.addAttribute("accident", accidentServiceJdbc.findById(id));
+        model.addAttribute("types", serviceHbm.getAccidentTypesList());
+        model.addAttribute("rules", serviceHbm.getRulesList());
+        model.addAttribute("accident", serviceHbm.findById(id));
         return "accident/update";
     }
 }
