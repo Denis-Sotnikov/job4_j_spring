@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+//@Repository
 @Component
 public class AccidentMem implements Store<Accident, String> {
     AtomicInteger atomicInt = new AtomicInteger();
@@ -23,11 +23,11 @@ public class AccidentMem implements Store<Accident, String> {
             Rule.of(3, "Статья. 3"));
 
     public AccidentMem() {
-        Accident first = new Accident(1, "Первый инцидент", "Все ок", "SPB", accidentTypes.get(1), Set.of(Rule.of(1, "Статья 1")));
+        Accident first = new Accident(1, "Первый инцидент", "Все ок", "SPB", accidentTypes.get(0), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(first.getId(), first);
-        Accident second = new Accident(2, "Второй инцидент", "Все ок", "USA", accidentTypes.get(2), Set.of(Rule.of(1, "Статья 1")));
+        Accident second = new Accident(2, "Второй инцидент", "Все ок", "USA", accidentTypes.get(1), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(second.getId(), second);
-        Accident third = new Accident(3, "Третий инцидент", "Все ок", "Canada", accidentTypes.get(3), Set.of(Rule.of(1, "Статья 1")));
+        Accident third = new Accident(3, "Третий инцидент", "Все ок", "Canada", accidentTypes.get(2), Set.of(Rule.of(1, "Статья 1")));
         accidents.put(third.getId(), third);
     }
 
