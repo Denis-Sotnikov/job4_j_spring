@@ -5,7 +5,9 @@
 и редактировать уже сохраненные в базе данных.
 Используемые технологии: Spring MVC, Hibernate ORM, Spring Data, Srping JDBC,  Srping Security, JSP, Bootstrap.
 <br>
+
 Вид стартовой страницы с применением Bootstrap
+
 ![ScreenShot](img/1.png)
 <br>
 
