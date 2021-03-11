@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-//@Repository
+@Repository
 @Component
 public class AccidentMem implements Store<Accident, String> {
     AtomicInteger atomicInt = new AtomicInteger();
