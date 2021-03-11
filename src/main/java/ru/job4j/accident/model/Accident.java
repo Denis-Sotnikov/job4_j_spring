@@ -22,6 +22,12 @@ public class Accident {
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Rule> rules = new HashSet<>();
 
+    public static Rule of(int id, String name) {
+        Rule rule = new Rule();
+        rule.setId(id);
+        rule.setName(name);
+        return rule;
+    }
 
     public Accident() {
     }

@@ -12,6 +12,9 @@
     <title>Accident</title>
 </head>
 <body>
+<div>
+    Login as : ${user.username}
+</div>
 <div style="width: 60%; padding-left: 30px; padding-top: 30px">
         <label for="tableFirst">Получаемые данные из indexControl</label>
         <table class="table" id="tableFirst">

@@ -37,7 +37,7 @@ public class AccidentServiceSpringData {
         Accident accidentT = this.preSaveOrUpdate(accident, rules);
         try (Session session = sf.openSession()) {
             session.beginTransaction();
-        //accidentStore.save(accidentT);
+//        accidentStore.save(accidentT);
             session.save(accidentT);
             session.getTransaction().commit();
         }
