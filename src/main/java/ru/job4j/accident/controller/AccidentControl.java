@@ -7,20 +7,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.accident.model.Accident;
-import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.service.AccidentServiceHbm;
 import ru.job4j.accident.service.AccidentServiceSpringData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class AccidentControl {
-    private  final AccidentServiceHbm serviceHbm;
     private  final AccidentServiceSpringData springData;
 
-    public AccidentControl(AccidentServiceHbm serviceHbm, AccidentServiceSpringData springData) {
-        this.serviceHbm = serviceHbm;
+    public AccidentControl(AccidentServiceSpringData springData) {
         this.springData = springData;
     }
 
@@ -33,7 +29,6 @@ public class AccidentControl {
 
     @PostMapping("/save")
     public String save(@RequestParam("rIds") List<String> rules, @ModelAttribute Accident accident) {
-//        serviceHbm.saveOr(accident, rules);
         springData.save(accident, rules);
         return "redirect:/";
     }
@@ -42,7 +37,7 @@ public class AccidentControl {
     public String update(@RequestParam("id") int id, Model model) {
         model.addAttribute("types", springData.getAccidentTypes());
         model.addAttribute("rules", springData.getListRules());
-        model.addAttribute("accident", serviceHbm.findById(id));
+        model.addAttribute("accident", springData.findById(id).get());
         return "accident/update";
     }
 }

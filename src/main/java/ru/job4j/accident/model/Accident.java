@@ -19,7 +19,7 @@ public class Accident {
     @JoinColumn(name = "type_id")
     private AccidentType type;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private Set<Rule> rules = new HashSet<>();
 
     public static Rule of(int id, String name) {
